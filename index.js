@@ -91,9 +91,9 @@ function oneCicle() {
 window.oneCicle = oneCicle;
 
 function playAudio() {
-  navigation?.vibrate(300);
   if (!document.querySelector(".started")) return;
   const audio = new Audio("1.wav");
+  navigator?.vibrate(250);
   audio.play();
 }
 
