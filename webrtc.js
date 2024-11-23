@@ -16,7 +16,7 @@ function handleOffer(offer) {
   };
 
   remoteConnection
-    .setRemoteDescription(new RTCSessionDescription(offer))
+    ?.setRemoteDescription(new RTCSessionDescription(offer))
     .then(() => {
       return remoteConnection.createAnswer();
     })
@@ -39,7 +39,7 @@ function handleOffer(offer) {
 
 function handleAnswer(answer) {
   localConnection
-    .setRemoteDescription(new RTCSessionDescription(answer))
+    ?.setRemoteDescription(new RTCSessionDescription(answer))
     .catch((error) => console.error("Error handling answer: ", error));
 }
 
