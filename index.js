@@ -1,7 +1,7 @@
 const HOST =
   location.hostname !== "sofg1.github.io"
     ? "192.168.100.84:3000"
-    : "https://socket-psli.onrender.com/";
+    : "https://socket-psli.onrender.com";
 
 const socket = io(HOST);
 window.socket = socket;
