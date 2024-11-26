@@ -5,6 +5,7 @@ const HOST =
 
 const socket = io(HOST);
 window.socket = socket;
+const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 
 window.settings = {
   speed: "3000",
@@ -46,10 +47,12 @@ window.stop = function stop() {
   clearInterval(soundInterval);
 };
 
-function playAudio() {
+async function playAudio() {
   if (!circleElement.classList.contains("started")) return;
   const audio = new Audio("1.wav");
   audio.play();
+  delay(1);
+  navigator?.vibrate(350);
 }
 
 function restartAnimation() {
