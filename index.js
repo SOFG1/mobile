@@ -6,16 +6,15 @@ const HOST =
 const socket = io(HOST);
 window.socket = socket;
 
-let soundInterval;
-
 window.settings = {
   speed: "3000",
 };
 
+let soundInterval;
 const startBtn = document.querySelector(".start");
 const stopBtn = document.querySelector(".stop");
 const input = document.querySelector(".number");
-const circleElement = document.querySelector(".circle");
+let circleElement = document.querySelector(".circle");
 
 startBtn.addEventListener("click", (e) => {
   socket.emit("session", "start");
@@ -33,8 +32,8 @@ socket.on("session", (arg) => {
 window.start = async function start() {
   startBtn.setAttribute("disabled", true);
   stopBtn?.removeAttribute("disabled");
+  restartAnimation();
   const duration = window.settings.speed;
-  circleElement.classList.add("started");
   circleElement.style.animationDuration = `${duration}ms`;
   clearInterval(soundInterval);
   soundInterval = setInterval(playAudio, duration / 2);
@@ -48,9 +47,17 @@ window.stop = function stop() {
 };
 
 function playAudio() {
-  if (circleElement.classList.contains("started")) return;
+  if (!circleElement.classList.contains("started")) return;
   const audio = new Audio("1.wav");
   audio.play();
+}
+
+function restartAnimation() {
+  circleElement.remove();
+  circleElement = document.createElement("div");
+  document.body.append(circleElement);
+  circleElement.classList.add("circle");
+  circleElement.classList.add("started");
 }
 
 /////////////Speed
