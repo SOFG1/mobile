@@ -30,8 +30,9 @@ function handleOffer(offer) {
     receiveChannel = event.channel;
     receiveChannel.onmessage = (event) => {
       const message = event.data;
-      //alert(message);
-      oneCicle();
+      if (message === "start") window.start();
+      if (message === "stop") window.stop();
+
       console.log(message);
     };
   };
