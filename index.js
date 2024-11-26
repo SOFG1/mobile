@@ -77,3 +77,9 @@ input?.addEventListener("change", (e) => {
   settings.speed = e.target.value;
   socket.emit("settings", settings);
 });
+
+socket.on("settings", (arg) => {
+  window.settings = arg;
+  window.start();
+  input.value = arg.speed;
+});
